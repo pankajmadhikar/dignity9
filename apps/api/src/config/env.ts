@@ -1,0 +1,43 @@
+import { z } from 'zod';
+
+const schema = z.object({
+  DATABASE_URL: z.string().min(1),
+  PORT: z.coerce.number().default(4000),
+  NODE_ENV: z.string().default('development'),
+  REDIS_URL: z.string().default('redis://127.0.0.1:6379'),
+  WEB_ORIGIN: z.string().default('http://localhost:5173'),
+  PUBLIC_APP_URL: z.string().default('http://localhost:5173'),
+  STORAGE_DRIVER: z.enum(['local', 's3']).default('local'),
+  S3_BUCKET: z.string().optional(),
+  S3_REGION: z.string().default('ap-south-1'),
+  S3_ENDPOINT: z.string().optional(),
+  S3_ACCESS_KEY_ID: z.string().optional(),
+  S3_SECRET_ACCESS_KEY: z.string().optional(),
+  WHATSAPP_TOKEN: z.string().optional(),
+  WHATSAPP_PHONE_ID: z.string().optional(),
+  WHATSAPP_TEMPLATE: z.string().optional(),
+  SMS_API_URL: z.string().optional(),
+  SMS_API_KEY: z.string().optional(),
+  SENTRY_DSN: z.string().optional(),
+});
+
+export const env = schema.parse({
+  DATABASE_URL: process.env.DATABASE_URL,
+  PORT: process.env.PORT,
+  NODE_ENV: process.env.NODE_ENV,
+  REDIS_URL: process.env.REDIS_URL,
+  WEB_ORIGIN: process.env.WEB_ORIGIN,
+  PUBLIC_APP_URL: process.env.PUBLIC_APP_URL,
+  STORAGE_DRIVER: process.env.STORAGE_DRIVER,
+  S3_BUCKET: process.env.S3_BUCKET,
+  S3_REGION: process.env.S3_REGION,
+  S3_ENDPOINT: process.env.S3_ENDPOINT,
+  S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
+  S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
+  WHATSAPP_TOKEN: process.env.WHATSAPP_TOKEN,
+  WHATSAPP_PHONE_ID: process.env.WHATSAPP_PHONE_ID,
+  WHATSAPP_TEMPLATE: process.env.WHATSAPP_TEMPLATE,
+  SMS_API_URL: process.env.SMS_API_URL,
+  SMS_API_KEY: process.env.SMS_API_KEY,
+  SENTRY_DSN: process.env.SENTRY_DSN,
+});

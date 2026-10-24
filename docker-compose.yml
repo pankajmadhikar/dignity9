@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: dignity
+      POSTGRES_PASSWORD: dignity
+      POSTGRES_DB: dignity9
+    ports:
+      - '5432:5432'
+    volumes:
+      - dignity-postgres:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    ports:
+      - '6379:6379'
+
+volumes:
+  dignity-postgres:
